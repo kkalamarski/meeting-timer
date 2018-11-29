@@ -10865,16 +10865,16 @@ var elm$core$Basics$abs = function (n) {
 	return (n < 0) ? (-n) : n;
 };
 var elm$core$String$length = _String_length;
-var author$project$Main$formatTimePart = function (part) {
+var author$project$TimeDisplay$formatTimePart = function (part) {
 	var text = elm$core$String$fromInt(
 		elm$core$Basics$abs(part));
 	return (elm$core$String$length(text) === 1) ? ('0' + text) : text;
 };
-var author$project$Main$formatTime = function (seconds) {
+var author$project$TimeDisplay$formatTime = function (seconds) {
 	var secs = seconds % 60;
 	var minutes = ((seconds / 60) | 0) % (60 * 60);
 	var hours = ((seconds / 360) | 0) % ((60 * 60) * 60);
-	return author$project$Main$formatTimePart(hours) + (':' + (author$project$Main$formatTimePart(minutes) + (':' + author$project$Main$formatTimePart(secs))));
+	return author$project$TimeDisplay$formatTimePart(hours) + (':' + (author$project$TimeDisplay$formatTimePart(minutes) + (':' + author$project$TimeDisplay$formatTimePart(secs))));
 };
 var mdgriffith$elm_ui$Internal$Model$Rgba = F4(
 	function (a, b, c, d) {
@@ -10903,7 +10903,7 @@ var mdgriffith$elm_ui$Element$Font$color = function (fontColor) {
 			'color',
 			fontColor));
 };
-var author$project$Main$getColor = function (time) {
+var author$project$TimeDisplay$getColor = function (time) {
 	return (time > 0) ? mdgriffith$elm_ui$Element$Font$color(
 		A4(mdgriffith$elm_ui$Element$rgba, 255, 255, 255, 1)) : mdgriffith$elm_ui$Element$Font$color(
 		A4(mdgriffith$elm_ui$Element$rgba, 255, 0, 0, 1));
@@ -10935,16 +10935,16 @@ var mdgriffith$elm_ui$Element$Font$size = function (i) {
 		mdgriffith$elm_ui$Internal$Flag$fontSize,
 		mdgriffith$elm_ui$Internal$Model$FontSize(i));
 };
-var author$project$Main$displayTime = function (time) {
+var author$project$TimeDisplay$displayTime = function (time) {
 	return A2(
 		mdgriffith$elm_ui$Element$el,
 		_List_fromArray(
 			[
 				mdgriffith$elm_ui$Element$Font$size(70),
-				author$project$Main$getColor(time)
+				author$project$TimeDisplay$getColor(time)
 			]),
 		mdgriffith$elm_ui$Element$text(
-			author$project$Main$formatTime(time)));
+			author$project$TimeDisplay$formatTime(time)));
 };
 var mdgriffith$elm_ui$Internal$Model$AlignX = function (a) {
 	return {$: 'AlignX', a: a};
@@ -11304,7 +11304,7 @@ var author$project$Main$view = function (model) {
 						[
 							A2(author$project$Main$control, 'Start', author$project$Main$NoOp),
 							A2(author$project$Main$control, 'Pause', author$project$Main$NoOp),
-							author$project$Main$displayTime(model.time),
+							author$project$TimeDisplay$displayTime(model.time),
 							A2(author$project$Main$control, 'Stop', author$project$Main$NoOp),
 							A2(author$project$Main$control, 'Reset', author$project$Main$NoOp)
 						])),
