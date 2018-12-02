@@ -1,8 +1,6 @@
 "use strict"
 const electron = require("electron")
-
-const app = electron.app
-const BrowserWindow = electron.BrowserWindow
+const { app, BrowserWindow, ipcMain } = electron
 
 let mainWindow
 
@@ -22,3 +20,8 @@ function createWindow() {
     mainWindow = null
   })
 }
+
+ipcMain.on("tick", (event, arg) => {
+  console.log("tick", arg)
+  // Send event to driver
+})
